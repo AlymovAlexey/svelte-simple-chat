@@ -3,17 +3,22 @@
   import { getDialogs, getMessages } from "../requests.js"
   import ChatInput from "../components/Chat/ChatInput.svelte";
   import ChatHead from "../components/Chat/ChatHead.svelte";
+
+  const locale = "ru";
+
   let messages = [];
   let msg_count = 16;
   let msg_hist;
-  let active_dialog_id = 0;
-  const locale = "ru";
+  let dialogs = [];
+  let active_dialog_id;
 
   function scrollToBottom() {
     msg_hist.scrollTo({ left: 0, top: msg_hist.scrollHeight });
   }
 
   onMount(async () => {
+    dialogs = getDialogs();
+    active_dialog_id = findLastDialogId();
     getHistory(active_dialog_id);
     await tick();
     scrollToBottom();
@@ -22,6 +27,21 @@
   afterUpdate(() => {
     msg_hist.scrollTo(0, msg_hist.scrollHeight);
   });
+
+  function findLastDialogId() {
+    dialogs = dialogs.sort((a,b) => {
+      const a_date = new Date(a.date.replace(/(\d+).(\d+).(\d+){4}/, '$3/$2/$1'));
+      const b_date = new Date(b.date.replace(/(\d+).(\d+).(\d+){4}/, '$3/$2/$1'))
+      if (a_date > b_date){
+        return 1;
+      } else if (a_date < b_date){
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return dialogs[0].id
+  }
 
   function appendMessage(new_msg_text) {
     msg_count += 1;
@@ -33,8 +53,7 @@
       {
         id: msg_count,
         side: "outgoing_msg",
-        type: "send_msg",
-        text: new_msg_text,
+        text: new_msg_text.split('\n'),
         date: now_datetime,
       },
     ];
@@ -48,7 +67,6 @@
   function getHistory(dialog_id) {
     messages = getMessages(dialog_id);
   }
-  const dialogs = getDialogs()
 </script>
 
 <div class="container">
@@ -90,7 +108,11 @@
               </div>
             {:else}
               <div class="sent_msg">
-                <p>{message.text}</p>
+                <p>
+                {#each message.text as line_text}
+                {line_text}<br>
+                {/each}
+                </p>
                 <span class="time_date"> {message.date} </span>
               </div>
             {/if}
@@ -181,7 +203,7 @@
     margin: 8px 0 0;
   }
   .received_withd_msg {
-    width: 57%;
+    width: 60%;
   }
   .mesgs {
     float: left;
@@ -203,7 +225,7 @@
   }
   .sent_msg {
     float: right;
-    width: 46%;
+    width: 60%;
   }
   .input_msg_write {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
