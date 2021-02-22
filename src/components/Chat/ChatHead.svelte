@@ -1,0 +1,56 @@
+
+<div class="headind_srch">
+  <div class="recent_heading">
+    <h4>Диалоги</h4>
+  </div>
+  <div class="srch_bar">
+    <div class="stylish-input-group">
+      <input type="text" class="search-bar" placeholder="Поиск" />
+      <span class="input-group-addon">
+        <button type="button">
+          <i class="fa fa-search" aria-hidden="true" />
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .headind_srch {
+    padding: 10px 29px 10px 20px;
+    overflow: hidden;
+    border-bottom: 1px solid #c4c4c4;
+  }
+  .recent_heading {
+    float: left;
+    width: 10%;
+  }
+  .recent_heading h4 {
+    color: #05728f;
+    font-size: 21px;
+    margin: auto;
+  }
+  .srch_bar {
+    display: inline-block;
+    text-align: right;
+    width: 90%;
+  }
+  .srch_bar input {
+    float: right;
+    border: 1px solid #cdcdcd;
+    border-width: 0 0 1px 0;
+    width: 80%;
+    padding: 2px 0 4px 6px;
+    background: none;
+  }
+  .srch_bar .input-group-addon button {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    padding: 0;
+    color: #707070;
+    font-size: 18px;
+  }
+  .srch_bar .input-group-addon {
+    margin: 0 0 0 -27px;
+  }
+</style>
