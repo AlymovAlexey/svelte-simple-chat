@@ -1,3 +1,23 @@
+export function login(username, password) {
+  const tokens = {
+    succes: "123",
+    refresh: "234",
+  };
+  return tokens;
+}
+
+export function checkToken(succes_token) {
+  return false;
+}
+
+export function refreshToken(refresh_token) {
+  const tokens = {
+    succes: "123",
+    refresh: "234",
+  };
+  return tokens;
+}
+
 export function getDialogs() {
   return [
     {
@@ -56,8 +76,9 @@ export function getMessages(dialog_id) {
       {
         id: 5,
         side: "incoming_msg",
-        text:
-          ["We work directly with our designers and suppliers, and sell direct to you, which means quality, exclusive products, at a price anyone can afford."],
+        text: [
+          "We work directly with our designers and suppliers, and sell direct to you, which means quality, exclusive products, at a price anyone can afford.",
+        ],
         date: "11:01 AM | June 9",
       },
       {
@@ -75,8 +96,9 @@ export function getMessages(dialog_id) {
       {
         id: 8,
         side: "incoming_msg",
-        text:
-          ["We work directly with our designers and suppliers, and sell direct to you, which means quality, exclusive products, at a price anyone can afford."],
+        text: [
+          "We work directly with our designers and suppliers, and sell direct to you, which means quality, exclusive products, at a price anyone can afford.",
+        ],
         date: "11:01 AM | June 9",
       },
     ];

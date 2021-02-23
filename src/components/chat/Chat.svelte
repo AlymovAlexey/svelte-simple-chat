@@ -86,7 +86,7 @@
       chooseDialog(found_dialog.id);
 
       await tick();
-      console.log(dialog_from);
+
       dialog_from.innerHTML = found_dialog.from.replace(
         new RegExp(search_string, "i"),
         `<span style="background-color:yellow;";>${event.detail.text}</span>`

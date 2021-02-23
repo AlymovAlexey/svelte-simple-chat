@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { login, checkToken, refreshToken } from "../requests.js";
 
   const dispatch = createEventDispatcher();
 
@@ -9,15 +10,17 @@
 
   function onSubmit() {
     isLoading = true;
-    console.log(username, password);
+    const new_tokens = login(username, password);
     setTimeout(() => {
       isLoading = false;
-      navigate("/", { replace: true });
     }, 2000);
-    dispatch("message", {
-      login: true,
-      user: username,
-    });
+    if (new_tokens) {
+      localStorage.setItem("tokens", new_tokens);
+      dispatch("message", {
+        login: true,
+        user: username,
+      });
+    }
   }
 </script>
 
@@ -74,9 +77,9 @@
     left: 0;
     display: flex;
     align-items: center;
-    align-content: center; 
-    justify-content: center; 
-    overflow: auto;   
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
   }
   .form-signin {
     /* width: 100%; */
