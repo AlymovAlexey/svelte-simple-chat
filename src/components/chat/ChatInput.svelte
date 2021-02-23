@@ -1,7 +1,7 @@
 <script>
   import Input from "./Input.svelte";
   import { createEventDispatcher } from "svelte";
-  
+
   const dispatch = createEventDispatcher();
   let msgInput;
 </script>

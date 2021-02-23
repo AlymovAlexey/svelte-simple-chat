@@ -1,8 +1,8 @@
 <script>
   import { afterUpdate, onMount, tick } from "svelte";
-  import { getDialogs, getMessages } from "../requests.js";
-  import ChatInput from "../components/Chat/ChatInput.svelte";
-  import ChatHead from "../components/Chat/ChatHead.svelte";
+  import { getDialogs, getMessages } from "../../requests.js";
+  import ChatInput from "./ChatInput.svelte";
+  import ChatHead from "./ChatHead.svelte";
 
   const locale = "ru";
 
@@ -100,7 +100,7 @@
 <div class="container-chat">
   <div class="inbox_msg">
     <div class="inbox_people">
-      <ChatHead on:submit={findDialog} />
+      <ChatHead on:submit={findDialog} on:exit />
       <div class="inbox_chat">
         {#each dialogs as dialog}
           <div
@@ -170,7 +170,6 @@
 
 <style>
   .container-chat {
-    padding-top: 47px;
     height: 100%;
   }
   img {

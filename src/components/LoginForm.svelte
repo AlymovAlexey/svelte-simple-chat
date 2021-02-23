@@ -1,5 +1,7 @@
 <script>
-  import { navigate } from "svelte-routing";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   let username = "";
   let password = "";
@@ -12,11 +14,15 @@
       isLoading = false;
       navigate("/", { replace: true });
     }, 2000);
+    dispatch("message", {
+      login: true,
+      user: username,
+    });
   }
 </script>
 
 <div class="container-login">
-  <main class="form-signin text-center">
+  <div class="form-signin text-center">
     {#if isLoading}
       <div class="spinner-border m-" role="status">
         <span class="sr-only" />
@@ -49,7 +55,7 @@
         <button class="w-100 btn-lg btn-primary" type="submit">Войти</button>
       </form>
     {/if}
-  </main>
+  </div>
 </div>
 
 <style>
@@ -61,16 +67,23 @@
     border: #05728f;
   }
   .container-login {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    align-content: center; 
+    justify-content: center; 
+    overflow: auto;   
   }
   .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
+    /* width: 100%; */
+    width: 330px;
+    height: 300px;
+    /* padding: 15px; */
+    /* margin: auto; */
   }
   .form-signin .checkbox {
     font-weight: 400;

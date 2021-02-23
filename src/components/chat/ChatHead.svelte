@@ -9,14 +9,17 @@
       dispatch("submit", {
         text: search,
       });
-      search = ""
+      search = "";
     }
+  }
+  function exit(e) {
+    dispatch("exit");
   }
 </script>
 
 <div class="headind_srch">
   <div class="recent_heading">
-    <h4>Диалоги</h4>
+    <button type="button" class="btn btn-light" on:click={exit}>Выход</button>
   </div>
   <div class="srch_bar">
     <div class="stylish-input-group">
@@ -43,24 +46,19 @@
     border-bottom: 1px solid #c4c4c4;
   }
   .recent_heading {
-    float: left;
-    width: 10%;
-  }
-  .recent_heading h4 {
-    color: #05728f;
-    font-size: 21px;
-    margin: auto;
+    float: right;
+    width: 15%;
   }
   .srch_bar {
     display: inline-block;
     text-align: right;
-    width: 90%;
+    width: 85%;
   }
   .srch_bar input {
-    float: right;
+    float: left;
     border: 1px solid #cdcdcd;
     border-width: 0 0 1px 0;
-    width: 80%;
+    width: 70%;
     padding: 2px 0 4px 6px;
     background: none;
   }
