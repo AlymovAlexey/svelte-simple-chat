@@ -22,7 +22,7 @@
       maxRows={3}
       bind:value={msgInput}
       name="msg"
-      placeholder="Message"
+      placeholder="Введите сообщение"
       ariaLabel="Message"
     />
   </form>

@@ -1,3 +1,18 @@
+<script>
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+  let search;
+
+  function handleKeyPress(e) {
+    if (e.which === 13) {
+      dispatch("submit", {
+        text: search,
+      });
+      search = ""
+    }
+  }
+</script>
 
 <div class="headind_srch">
   <div class="recent_heading">
@@ -5,7 +20,13 @@
   </div>
   <div class="srch_bar">
     <div class="stylish-input-group">
-      <input type="text" class="search-bar" placeholder="Поиск" />
+      <input
+        type="text"
+        class="search-bar"
+        placeholder="Поиск"
+        bind:value={search}
+        on:keypress={handleKeyPress}
+      />
       <span class="input-group-addon">
         <button type="button">
           <i class="fa fa-search" aria-hidden="true" />

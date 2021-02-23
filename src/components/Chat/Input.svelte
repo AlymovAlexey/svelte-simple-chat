@@ -30,7 +30,7 @@
       // but not on 'soft return'
       e.target.form.dispatchEvent(
         new Event("submit", {
-          cancelable: true
+          cancelable: true,
         })
       );
       e.preventDefault();
@@ -74,13 +74,13 @@
 
 <style>
   .input-with-button {
+    padding: 10px;
     position: relative;
   }
 
   .input {
     padding: 0.6em 2em 0.6em 0.6em;
     width: 100%;
-    height: 90px;
     resize: none;
     overflow-x: hidden;
   }
@@ -98,10 +98,10 @@
 
   .submit {
     position: absolute;
-    top: 0.4em;
-    right: 0.4em;
-    width: 1.5em;
-    height: 1.5em;
+    top: 2.2em;
+    right: 1.5em;
+    width: 2.5em;
+    height: 2.5em;
     background: no-repeat 50% 50% url(/up.svg);
     background-size: 0.75em;
     border: none;

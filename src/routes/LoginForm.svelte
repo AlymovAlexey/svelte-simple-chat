@@ -15,7 +15,7 @@
   }
 </script>
 
-<div class="container">
+<div class="container-login">
   <main class="form-signin text-center">
     {#if isLoading}
       <div class="spinner-border m-" role="status">
@@ -53,8 +53,46 @@
 </div>
 
 <style>
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited {
     background-color: #05728f !important;
     border: #05728f;
-}
+  }
+  .container-login {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 </style>

@@ -6,7 +6,6 @@
   import Chat from "./routes/Chat.svelte"
   import SettingsForm from "./components/SettingsForm.svelte"
 
-  // let login = "";
   export let url = "";
 
 </script>
