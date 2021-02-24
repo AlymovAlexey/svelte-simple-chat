@@ -18,7 +18,7 @@
   }
 
   onMount(async () => {
-    dialogs = getDialogs();
+    dialogs = await getDialogs();
     active_dialog_id = findLastDialogId();
     getHistory(active_dialog_id);
     await tick();
@@ -69,13 +69,13 @@
     getHistory(dialog_id);
   }
 
-  function getHistory(dialog_id) {
-    messages = getMessages(dialog_id);
+  async function getHistory(dialog_id) {
+    messages = await getMessages(dialog_id);
   }
 
   async function findDialog(event) {
     const search_string = event.detail.text.toLowerCase();
-    const found_dialog = dialogs.find((element, index, array) => {
+    const found_dialog = dialogs.find((element) => {
       const name = element.from.toLowerCase();
       return name.includes(search_string);
     });

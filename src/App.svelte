@@ -11,11 +11,11 @@
   onMount(async () => {
     try {
       const tokens = localStorage.getItem(tokens_key);
-      const valid_token = checkToken(tokens.success);
+      const valid_token = await checkToken(tokens.success);
       if (valid_token) {
         login = true;
       } else {
-        const new_tokens = refreshToken(tokens.refresh);
+        const new_tokens = await refreshToken(tokens.refresh);
         if (new_tokens) {
           localStorage.setItem(tokens_key, new_tokens);
           login = true;
@@ -25,7 +25,7 @@
   });
 
   function Login(event) {
-    if (event.detail.login) {
+    if (event.detail.login_success) {
       login = true;
     }
   }

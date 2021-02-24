@@ -1,4 +1,4 @@
-export function login(username, password) {
+export async function login(username, password) {
   const tokens = {
     succes: "123",
     refresh: "234",
@@ -6,11 +6,19 @@ export function login(username, password) {
   return tokens;
 }
 
-export function checkToken(succes_token) {
+export async function create_new_user(username, password) {
+  const tokens = {
+    succes: "123",
+    refresh: "234",
+  };
+  return tokens;
+}
+
+export async function checkToken(succes_token) {
   return false;
 }
 
-export function refreshToken(refresh_token) {
+export async function refreshToken(refresh_token) {
   const tokens = {
     succes: "123",
     refresh: "234",
@@ -18,7 +26,7 @@ export function refreshToken(refresh_token) {
   return tokens;
 }
 
-export function getDialogs() {
+export async function getDialogs() {
   return [
     {
       id: 0,
@@ -37,7 +45,7 @@ export function getDialogs() {
   ];
 }
 
-export function getMessages(dialog_id) {
+export async function getMessages(dialog_id) {
   if (dialog_id === 0) {
     return [
       {

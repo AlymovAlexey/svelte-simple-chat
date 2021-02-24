@@ -1,24 +1,34 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { login, checkToken, refreshToken } from "../requests.js";
+  import { login, create_new_user } from "../requests.js";
 
   const dispatch = createEventDispatcher();
 
   let username = "";
   let password = "";
+  let password_again = "";
+  let remember;
+  let new_user = false;
   let isLoading = false;
 
-  function onSubmit() {
-    isLoading = true;
-    const new_tokens = login(username, password);
-    setTimeout(() => {
-      isLoading = false;
-    }, 2000);
+  async function onSubmit() {
+    let new_tokens;
+    if (new_user) {
+      if (password !== password_again) {
+        alert("Пароли не совпадают");
+        return;
+      }
+      isLoading = true;
+      new_tokens = await create_new_user(username, password);
+    } else {
+      isLoading = true;
+      new_tokens = await login(username, password);
+    }
+    isLoading = false;
     if (new_tokens) {
-      localStorage.setItem("tokens", new_tokens);
+      if (remember) localStorage.setItem("tokens", new_tokens);
       dispatch("message", {
-        login: true,
-        user: username,
+        login_success: true,
       });
     }
   }
@@ -40,22 +50,47 @@
           id="inputEmail"
           class="form-control"
           placeholder="Электронная почта"
-          required=""
+          required="true"
         />
         <input
           bind:value={password}
           type="password"
-          id="inputPassword"
           class="form-control"
           placeholder="Пароль"
-          required=""
+          required="true"
         />
+        {#if !new_user}
+          <button class="w-100 btn-lg btn-primary" type="submit">Войти</button>
+        {:else}
+          <input
+            bind:value={password_again}
+            type="password"
+            class="form-control"
+            placeholder="Повторите пароль"
+            required="true"
+          />
+        {/if}
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me" /> Запомни меня
+            <input
+              type="checkbox"
+              value="remember-me"
+              bind:checked={remember}
+            /> Запомни меня
           </label>
         </div>
-        <button class="w-100 btn-lg btn-primary" type="submit">Войти</button>
+        {#if !new_user}
+          <button
+            class="w-100 btn-lg btn-secondary"
+            on:click={() => {
+              new_user = true;
+            }}>Создать аккаунт</button
+          >
+        {:else}
+          <button class="w-100 btn-lg btn-secondary" type="submit"
+            >Создать аккаунт</button
+          >
+        {/if}
       </form>
     {/if}
   </div>
@@ -82,18 +117,15 @@
     overflow: auto;
   }
   .form-signin {
-    /* width: 100%; */
     width: 330px;
     height: 300px;
-    /* padding: 15px; */
-    /* margin: auto; */
   }
   .form-signin .checkbox {
     font-weight: 400;
+    margin-top: 15px;
   }
   .form-signin .form-control {
     position: relative;
-    box-sizing: border-box;
     height: auto;
     padding: 10px;
     font-size: 16px;
